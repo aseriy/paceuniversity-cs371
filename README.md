@@ -1,6 +1,14 @@
 # paceuniversity-cs371
 Pace University CS371
 
+## How to contribute
+The official project site is [https://aseriy.github.io/paceuniversity-cs371/](https://aseriy.github.io/paceuniversity-cs371/). It is updated only by the project/repo coordinator.
+
+1. Work on your own branch, named after your GitHub username.
+2. Make your documentation updates on that branch and test them locally (see [Building the docs locally](#building-the-docs-locally)).
+3. Submit a PR when ready.
+4. Once the PR is merged, the repo coordinator publishes the site.
+
 ## Building the docs locally
 Test your documentation changes locally before raising a PR. You need Python 3 with pip (the site is maintained with Python 3.13.7).
 
