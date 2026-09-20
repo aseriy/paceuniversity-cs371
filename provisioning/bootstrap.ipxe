@@ -2,11 +2,15 @@
 
 dhcp
 
-set site https://aseriy.github.io/paceuniversity-cs371/provisioning
+set ubuntu https://releases.ubuntu.com/24.04.5
+set seed https://raw.githubusercontent.com/aseriy/paceuniversity-cs371/main/provisioning/autoinstall/
+set semicolon:hex 3b
 
-kernel ${site}/ubuntu/vmlinuz initrd=initrd ip=dhcp \
-  url=https://releases.ubuntu.com/24.04/ubuntu-24.04-live-server-amd64.iso \
-  autoinstall ds=nocloud-net;s=${site}/autoinstall/
+kernel ${ubuntu}/netboot/amd64/linux initrd=initrd \
+  root=/dev/ram0 ramdisk_size=1500000 \
+  cloud-config-url=/dev/null ip=dhcp \
+  url=${ubuntu}/ubuntu-24.04.5-live-server-amd64.iso \
+  autoinstall ds=nocloud-net${semicolon:string}s=${seed}
 
-initrd ${site}/ubuntu/initrd
+initrd ${ubuntu}/netboot/amd64/initrd
 boot
