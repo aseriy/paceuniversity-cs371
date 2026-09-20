@@ -353,6 +353,45 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Installation and configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#building-the-boot-usb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Building the boot USB
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#boot-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boot flow
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#provisioning-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Provisioning files
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -507,6 +546,45 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Installation and configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#building-the-boot-usb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Building the boot USB
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#boot-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boot flow
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#provisioning-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Provisioning files
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -550,15 +628,65 @@
 
 <h1 id="operating-system">Operating System</h1>
 <h2 id="goal">Goal</h2>
-<p>What should be working when this stage is complete?</p>
+<p>A Lenovo ThinkCentre M715q, booted from the bootstrap USB on campus Ethernet, installs Ubuntu 24.04.5 Server unattended onto its SSD and comes up reachable over SSH with the hostname <code>cs371-&lt;last 6 hex digits of its Ethernet MAC&gt;</code>.</p>
 <h2 id="prerequisites">Prerequisites</h2>
-<p>What equipment, access, and previous steps are required?</p>
+<ul>
+<li>Campus Ethernet with DHCP and outbound HTTPS.</li>
+<li>The flashed <code>cs371-bootstrap.img</code> USB stick. Physical and firmware steps (USB boot order, Secure Boot) are covered on the <a href="../hardware/">Hardware</a> page.</li>
+<li>A Linux machine to build the iPXE USB image.</li>
+</ul>
 <h2 id="design-decisions">Design decisions</h2>
-<p>What did we choose, and why?</p>
+<ul>
+<li><strong>The USB stick carries only a minimal embedded iPXE script</strong> (<code>provisioning/usb.ipxe</code>) that chains to the GitHub-hosted <code>provisioning/bootstrap.ipxe</code>. Boot logic can be revised in this repository without reflashing any USB sticks.</li>
+<li><strong>Ubuntu autoinstall with a NoCloud seed served from this repository.</strong> <code>bootstrap.ipxe</code> boots the Ubuntu 24.04.5 live-server installer over the network and points it at the raw GitHub URL of <code>provisioning/autoinstall/</code>, so the entire install is unattended and reproducible from this repository alone.</li>
+<li><strong>SSH key-only access.</strong> The installer creates the <code>admin</code> user with a locked password and <code>allow-pw: false</code>; the only way in is the authorized SSH key.</li>
+<li><strong>MAC-derived hostname.</strong> Each machine names itself <code>cs371-</code> plus the last 6 hex digits of its Ethernet MAC, guaranteeing unique, predictable hostnames with no per-machine configuration.</li>
+</ul>
 <h2 id="installation-and-configuration">Installation and configuration</h2>
-<p>Steps, commands, and configuration examples.</p>
+<h3 id="building-the-boot-usb">Building the boot USB</h3>
+<p>On a Linux machine, install the build dependencies and build iPXE with <code>usb.ipxe</code> embedded:</p>
+<pre><code class="language-bash">sudo apt install syslinux-common mtools syslinux
+git clone https://github.com/ipxe/ipxe.git
+cd ipxe/src
+make bin-x86_64-efi/ipxe.usb EMBED=&lt;path to paceuniversity-cs371&gt;/provisioning/usb.ipxe
+</code></pre>
+<p>Rename the resulting <code>bin-x86_64-efi/ipxe.usb</code> to <code>cs371-bootstrap.img</code> for easier tool compatibility, then flash it to a USB stick:</p>
+<ul>
+<li>Windows: Rufus or balenaEtcher</li>
+<li>Linux: <code>dd</code></li>
+</ul>
+<h3 id="boot-flow">Boot flow</h3>
+<pre><code>USB → iPXE → bootstrap.ipxe (GitHub) → Ubuntu installer → Autoinstall
+</code></pre>
+<h3 id="provisioning-files">Provisioning files</h3>
+<pre><code>provisioning/
+├── usb.ipxe
+├── bootstrap.ipxe
+└── autoinstall/
+    ├── user-data
+    └── meta-data
+</code></pre>
+<ul>
+<li><code>usb.ipxe</code> — embedded in the USB image. Obtains a DHCP lease and chains to the current <code>bootstrap.ipxe</code> on GitHub.</li>
+<li><code>bootstrap.ipxe</code> — downloads the Ubuntu 24.04.5 netboot kernel and initrd from <code>https://releases.ubuntu.com/24.04.5</code>, boots the live-server ISO over HTTPS, and passes <code>autoinstall ds=nocloud-net</code> with the seed URL pointing at this repository's <code>provisioning/autoinstall/</code>. The <code>set semicolon:hex 3b</code> line embeds the literal <code>;</code> that the NoCloud datasource syntax requires in the kernel command line.</li>
+<li><code>autoinstall/user-data</code> — the autoinstall configuration:<ul>
+<li>creates the <code>admin</code> user with a locked password (<code>"!"</code>);</li>
+<li>installs the SSH server with password login disabled and the authorized key from the <code>authorized-keys</code> list (currently the <code>ssh-ed25519 YOUR_PUBLIC_KEY</code> placeholder);</li>
+<li>installs Ubuntu directly to the SSD (<code>storage: layout: name: direct</code>);</li>
+<li>installs <code>git</code> and <code>curl</code>;</li>
+<li>in <code>late-commands</code>, derives the hostname from the default-route interface's MAC address and writes it into <code>/target/etc/hostname</code> and <code>/target/etc/hosts</code>.</li>
+</ul>
+</li>
+<li><code>autoinstall/meta-data</code> — empty, but must exist for the NoCloud datasource to accept the seed.</li>
+</ul>
 <h2 id="verification">Verification</h2>
-<p>How do we demonstrate that it works? Include expected results.</p>
+<p>The first full boot test on the Lenovo hardware is still pending. Expected results:</p>
+<ol>
+<li>The machine boots from the USB, iPXE obtains DHCP, and fetches <code>bootstrap.ipxe</code> from GitHub.</li>
+<li>The installer downloads the kernel, initrd, and ISO from <code>releases.ubuntu.com</code> and runs the autoinstall to completion with no prompts.</li>
+<li>The machine reboots as <code>cs371-&lt;last 6 hex digits of its MAC&gt;</code>.</li>
+<li>SSH as <code>admin</code> with the authorized key succeeds; password login is refused.</li>
+</ol>
 <h2 id="troubleshooting">Troubleshooting</h2>
 <p>Problems encountered and how we resolved them.</p>
 
