@@ -318,6 +318,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#the-hardware" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The hardware
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#installation-and-configuration" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -325,6 +336,45 @@
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Installation and configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#building-the-boot-usb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Building the boot USB
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connecting-to-the-campus-network" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Connecting to the campus network
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#booting-from-the-usb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Booting from the USB
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -499,6 +549,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#the-hardware" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The hardware
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#installation-and-configuration" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -506,6 +567,45 @@
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Installation and configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#building-the-boot-usb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Building the boot USB
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connecting-to-the-campus-network" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Connecting to the campus network
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#booting-from-the-usb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Booting from the USB
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -550,15 +650,49 @@
 
 <h1 id="hardware">Hardware</h1>
 <h2 id="goal">Goal</h2>
-<p>What should be working when this stage is complete?</p>
+<p>A bare Lenovo ThinkCentre M715q, plugged into the university campus network and booted from the bootstrap USB stick, reaches the point where remote-config provisioning takes over. The unattended install itself is covered on the <a href="../operating-system/">Operating System</a> page.</p>
 <h2 id="prerequisites">Prerequisites</h2>
-<p>What equipment, access, and previous steps are required?</p>
+<ul>
+<li>A campus network drop (RJ45).</li>
+<li>From university IT: DHCP and outbound HTTPS on that drop.</li>
+<li>A USB stick.</li>
+<li>A Linux machine to build the iPXE USB image.</li>
+</ul>
 <h2 id="design-decisions">Design decisions</h2>
-<p>What did we choose, and why?</p>
+<ul>
+<li><strong>The process is codified and repeatable.</strong> Nothing in it is machine-specific — hostnames, credentials, and configuration all derive from the remote config in this repository — so it scales to any number of boxes.</li>
+<li><strong>Commodity small-form-factor hardware.</strong> The Lenovo ThinkCentre M715q is inexpensive, quiet, and fits campus desk space.</li>
+<li><strong>The USB stick is the only physical bootstrap medium.</strong> It carries a minimal embedded script that chains to this repository; see the <a href="../operating-system/">Operating System</a> page for why the boot logic lives in the repository rather than on the stick.</li>
+</ul>
+<h2 id="the-hardware">The hardware</h2>
+<p>Lenovo ThinkCentre M715q.</p>
+<p>Specifications (CPU, RAM, SSD, NIC) — to be researched and documented.</p>
 <h2 id="installation-and-configuration">Installation and configuration</h2>
-<p>Steps, commands, and configuration examples.</p>
+<h3 id="building-the-boot-usb">Building the boot USB</h3>
+<p>On a Linux machine, install the build dependencies and build iPXE with <code>usb.ipxe</code> embedded:</p>
+<pre><code class="language-bash">sudo apt install syslinux-common mtools syslinux
+git clone https://github.com/ipxe/ipxe.git
+cd ipxe/src
+make bin-x86_64-efi/ipxe.usb EMBED=&lt;path to paceuniversity-cs371&gt;/provisioning/usb.ipxe
+</code></pre>
+<p>Rename the resulting <code>bin-x86_64-efi/ipxe.usb</code> to <code>cs371-bootstrap.img</code> for easier tool compatibility, then flash it to a USB stick:</p>
+<ul>
+<li>Windows: Rufus or balenaEtcher</li>
+<li>Linux: <code>dd</code></li>
+</ul>
+<h3 id="connecting-to-the-campus-network">Connecting to the campus network</h3>
+<p>Plug the machine into a campus network drop via RJ45. The drop must provide DHCP and allow outbound HTTPS.</p>
+<p>What to request from IT, and how — to be researched and documented.</p>
+<h3 id="booting-from-the-usb">Booting from the USB</h3>
+<p>Insert the USB stick and boot the machine from it (boot order or one-time boot menu). Disable Secure Boot if necessary.</p>
+<p>Document the exact M715q firmware steps (boot menu key, boot order settings, Secure Boot) — to be researched and documented after the first boot test.</p>
 <h2 id="verification">Verification</h2>
-<p>How do we demonstrate that it works? Include expected results.</p>
+<p>The first boot test on the Lenovo hardware is still pending. Expected results:</p>
+<ol>
+<li>The machine powers on and boots from the USB stick.</li>
+<li>iPXE obtains a DHCP lease and fetches <code>bootstrap.ipxe</code> from GitHub.</li>
+<li>The Ubuntu installer starts — from here the <a href="../operating-system/">Operating System</a> page takes over.</li>
+</ol>
 <h2 id="troubleshooting">Troubleshooting</h2>
 <p>Problems encountered and how we resolved them.</p>
 
