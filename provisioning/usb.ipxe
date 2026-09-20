@@ -1,0 +1,3 @@
+#!ipxe
+dhcp
+chain https://raw.githubusercontent.com/aseriy/paceuniversity-cs371/main/provisioning/bootstrap.ipxe
