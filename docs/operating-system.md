@@ -6,7 +6,6 @@ A Lenovo ThinkCentre M715q, booted from the bootstrap USB on campus Ethernet, in
 ## Prerequisites
 - Campus Ethernet with DHCP and outbound HTTPS.
 - The flashed `cs371-bootstrap.img` USB stick. Physical and firmware steps (USB boot order, Secure Boot) are covered on the [Hardware](hardware.md) page.
-- A Linux machine to build the iPXE USB image.
 
 ## Design decisions
 - **The USB stick carries only a minimal embedded iPXE script** (`provisioning/usb.ipxe`) that chains to the GitHub-hosted `provisioning/bootstrap.ipxe`. Boot logic can be revised in this repository without reflashing any USB sticks.
@@ -16,20 +15,7 @@ A Lenovo ThinkCentre M715q, booted from the bootstrap USB on campus Ethernet, in
 
 ## Installation and configuration
 
-### Building the boot USB
-On a Linux machine, install the build dependencies and build iPXE with `usb.ipxe` embedded:
-
-```bash
-sudo apt install syslinux-common mtools syslinux
-git clone https://github.com/ipxe/ipxe.git
-cd ipxe/src
-make bin-x86_64-efi/ipxe.usb EMBED=<path to paceuniversity-cs371>/provisioning/usb.ipxe
-```
-
-Rename the resulting `bin-x86_64-efi/ipxe.usb` to `cs371-bootstrap.img` for easier tool compatibility, then flash it to a USB stick:
-
-- Windows: Rufus or balenaEtcher
-- Linux: `dd`
+Building and flashing the boot USB is covered on the [Hardware](hardware.md) page.
 
 ### Boot flow
 ```
