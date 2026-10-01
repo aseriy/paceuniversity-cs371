@@ -11,7 +11,7 @@ autoinstall:
     install-server: true
     allow-pw: false
     authorized-keys:
-      - ssh-ed25519 YOUR_PUBLIC_KEY
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL78f10Q66mZxpRZuKUdgPB4U4qo1y/Km2VfwBcD/XCF leylaismayilova@Leylas-MBP
 
   storage:
     layout:
