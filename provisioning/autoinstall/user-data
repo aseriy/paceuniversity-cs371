@@ -3,8 +3,8 @@ autoinstall:
   version: 1
 
   identity:
-    hostname: temporary
-    username: admin
+    hostname: ubuntu-server
+    username: milkyway
     password: "!"
 
   ssh:
