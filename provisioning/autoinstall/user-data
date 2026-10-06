@@ -12,7 +12,7 @@ autoinstall:
     allow-pw: false
     authorized-keys:
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL78f10Q66mZxpRZuKUdgPB4U4qo1y/Km2VfwBcD/XCF leylaismayilova@Leylas-MBP
-
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDoXC8qc27vtfnbIrSmqmym8p3A69c+pPg4rxkGyqNBW6NgxFfBr5wA4J0e07BhUzfr4/2AQgy4mv1dY85hcyZZEPQ0/i2hHB6S5gkqyBRah1R1Y6kLey3k9+yil9vIdzZ1hnmwAYoEPKXJ8D8JBKikwxFL2yLYlp1VFUIQxxLVI6g1oMzpmype5pV8Ma9GKR9+pieg9huDfKeoHdTEq0OpIzaGKsWK9jFvBsLXyMVw88fkn4dgK87qKyfM3BIlzPTcCJE31uQVb1pEq2X2b1wPoefzwBk082U1MGG6cnv8q0roc7tPD19jMJgp5E+6O8Hmzk/7MIE3HZwxx2QNWaTz justinobrien@Justins-MBP.fios-router.home
   storage:
     layout:
       name: direct
