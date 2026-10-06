@@ -5,7 +5,7 @@ autoinstall:
   identity:
     hostname: temporary
     username: cs371student
-    password: "$6$HhDn0N.IHVxkSeQU$BIJcc6YGP12QLLsRvbAas75Tnt4CMz68p..eZgmJVzlWhSQYEHoTGH6A7WCNybF94EDfB46ORoZn4s1X1Vrv0/"
+    password: "!"
 
   ssh:
     install-server: true
