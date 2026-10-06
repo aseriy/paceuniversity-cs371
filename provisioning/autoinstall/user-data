@@ -4,7 +4,7 @@ autoinstall:
 
   identity:
     hostname: temporary
-    username: obrien
+    username: cs371student
     password: "!"
 
   ssh:
