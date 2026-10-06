@@ -3,7 +3,7 @@
 dhcp
 
 set ubuntu https://releases.ubuntu.com/24.04.5
-set seed https://raw.githubusercontent.com/aseriy/paceuniversity-cs371/main/provisioning/autoinstall/
+set seed https://raw.githubusercontent.com/aseriy/paceuniversity-cs371/obrien98/provisioning/autoinstall/
 set semicolon:hex 3b
 
 kernel ${ubuntu}/netboot/amd64/linux initrd=initrd \
