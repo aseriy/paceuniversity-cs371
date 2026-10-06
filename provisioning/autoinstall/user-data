@@ -5,7 +5,7 @@ autoinstall:
   identity:
     hostname: ubuntu-server
     username: milkyway
-    password: "!"
+    password: "galaxy"
 
   ssh:
     install-server: true
