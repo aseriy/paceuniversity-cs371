@@ -28,4 +28,7 @@ autoinstall:
       hostname="cs371-${mac#??????}"
       printf '%s\n' "$hostname" > /target/etc/hostname
       sed -i "s/temporary/$hostname/g" /target/etc/hosts
+    - |
+      mkdir -p /target/etc/issue.d
+      printf 'IP: \\4\n\n' > /target/etc/issue.d/ip.issue
 
