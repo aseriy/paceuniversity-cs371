@@ -4,8 +4,8 @@ autoinstall:
 
   identity:
     hostname: temporary
-    username: cs371student
-    password: "!"
+    username: twix
+    password: "password"
 
   ssh:
     install-server: true
