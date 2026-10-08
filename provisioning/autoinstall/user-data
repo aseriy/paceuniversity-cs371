@@ -12,6 +12,8 @@ autoinstall:
     allow-pw: false
     authorized-keys:
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL78f10Q66mZxpRZuKUdgPB4U4qo1y/Km2VfwBcD/XCF leylaismayilova@Leylas-MBP
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKs9OWYW1eGrRGLDNhFVDu/IGSEcoG3Gf2qBnM8LfiWt jordan@laptop
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII93N3id/56eCpoRKcQDxhU+XkYue6lm2GjFODuHa4R9 dianaanguisaca@Dianas-MacBook-Air-3.local
 
   storage:
     layout:
