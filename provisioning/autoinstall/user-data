@@ -29,3 +29,5 @@ autoinstall:
       printf '%s\n' "$hostname" > /target/etc/hostname
       sed -i "s/temporary/$hostname/g" /target/etc/hosts
       printf 'Hostname: \\n\nIP Address: \\4{%s}\n\n' "$iface" > /target/etc/issue
+
+    - curtin in-target --target=/target -- systemctl enable ssh
