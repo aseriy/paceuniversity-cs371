@@ -5,7 +5,7 @@ autoinstall:
   identity:
     hostname: temporary
     username: twix
-    password: "password"
+    password: '$6$UJ3Xz.6qlWTSosR5$Asgl6SGFB3Z/WnXGdGsESb4r.SaUz/yNYKlIkR8erp7rjr2Ct69/Wdibcnw3Va.UlzzsRBAYCl.TaU42E47fq.'
 
   ssh:
     install-server: true
