@@ -229,6 +229,10 @@ static_host_map: {}
 
 lighthouse:
   am_lighthouse: true
+  serve_dns: true
+  dns:
+    host: 10.80.0.1
+    port: 53
   hosts: []
 
 relay:
@@ -246,7 +250,10 @@ tun:
 
 firewall:
   outbound: []
-  inbound: []
+  inbound:
+    - port: 53
+      proto: udp
+      group: any
 
 logging:
   level: info
@@ -265,10 +272,11 @@ Validate this new config file:
 
 ```bash
 $ sudo /usr/local/bin/nebula -test -config /etc/nebula/config.yml
-time=2026-10-17T20:06:20.563Z level=INFO msg="firewall:\n    inbound: []\n    outbound: []\nlighthouse:\n    am_lighthouse: true\n    hosts: []\nlisten:\n    host: 0.0.0.0\n    port: 4242\nlogging:\n    format: text\n    level: info\npki:\n    ca: /etc/nebula/ca.crt\n    cert: /etc/nebula/lighthouse.crt\n    initiating_version: 2\n    key: /etc/nebula/lighthouse.key\nrelay:\n    am_relay: true\n    relays: []\n    use_relays: false\nstatic_host_map: {}\ntun:\n    dev: nebula1\n    disabled: false\n"
-time=2026-10-17T20:06:20.569Z level=INFO msg="Firewall started" firewallHashes=SHA:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855,FNV:2166136261
-time=2026-10-17T20:06:20.569Z level=INFO msg="Main HostMap created" preferredRanges=[]
-time=2026-10-17T20:06:20.570Z level=INFO msg="punchy disabled"
+time=2026-10-18T18:10:06.913Z level=INFO msg="firewall:\n    inbound:\n        - group: any\n          port: 53\n          proto: udp\n    outbound: []\nlighthouse:\n    am_lighthouse: true\n    dns:\n        host: 10.80.0.1\n        port: 53\n    hosts: []\n    serve_dns: true\nlisten:\n    host: 0.0.0.0\n    port: 4242\nlogging:\n    format: text\n    level: info\npki:\n    ca: /etc/nebula/ca.crt\n    cert: /etc/nebula/lighthouse.crt\n    initiating_version: 2\n    key: /etc/nebula/lighthouse.key\nrelay:\n    am_relay: true\n    relays: []\n    use_relays: false\nstatic_host_map: {}\ntun:\n    dev: nebula1\n    disabled: false\n"
+time=2026-10-18T18:10:06.918Z level=INFO msg="Firewall rule added" firewallRule="map[caName: caSha: cidr: direction:incoming endPort:53 groups:[any] host: localCidr: proto:17 startPort:53]"
+time=2026-10-18T18:10:06.918Z level=INFO msg="Firewall started" firewallHashes=SHA:65bf52fb0778bf05e3b7bac9dfbed963481e710f2eeaf53d09cf1d59317bca14,FNV:715780406
+time=2026-10-18T18:10:06.919Z level=INFO msg="Main HostMap created" preferredRanges=[]
+time=2026-10-18T18:10:06.919Z level=INFO msg="punchy disabled"
 ```
 
 Create the systemd service `/etc/systemd/system/nebula.service`:
@@ -286,8 +294,8 @@ Group=nebula
 ExecStart=/usr/local/bin/nebula -config /etc/nebula/config.yml
 Restart=on-failure
 RestartSec=5
-AmbientCapabilities=CAP_NET_ADMIN
-CapabilityBoundingSet=CAP_NET_ADMIN
+AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 NoNewPrivileges=true
 ProtectSystem=strict
 ProtectHome=true
@@ -333,8 +341,11 @@ Hint: Some lines were ellipsized, use -l to show in full.
 Verify Nebula is listening on UDP port `4242`:
 
 ```bash
-$ sudo ss -lunp | grep ':4242'
-UNCONN 0      0                 0.0.0.0:4242      0.0.0.0:*    users:(("nebula",pid=4336,fd=7))
+$ sudo ss -lunp | grep -E ':(53|4242)\b'
+UNCONN 0      0               10.80.0.1:53        0.0.0.0:*    users:(("nebula",pid=10122,fd=9))                        
+UNCONN 0      0              127.0.0.54:53        0.0.0.0:*    users:(("systemd-resolve",pid=329,fd=16))                
+UNCONN 0      0           127.0.0.53%lo:53        0.0.0.0:*    users:(("systemd-resolve",pid=329,fd=14))                
+UNCONN 0      0                 0.0.0.0:4242      0.0.0.0:*    users:(("nebula",pid=10122,fd=7))  
 ```
 
 Enable it at boot:
@@ -415,5 +426,325 @@ The laptop overlay IPs start at `10.80.0.100/24`.
 
 ```bash
 nebula-cert sign -ca-crt ca.crt -ca-key ca.key -name "jo14591n" -networks "10.80.0.100/24" -groups "laptops" -duration 8760h -version 2 -out-crt jo14591n.crt -out-key jo14591n.key
+```
+
+
+
+# Shared client configuration
+
+Replace `<LIGHTHOUSE_PUBLIC_IP>` with the EC2 Elastic IP.
+
+## Ryzen server config
+
+Use this as `/etc/nebula/config.yml`:
+
+```yaml
+pki:
+  ca: /etc/nebula/ca.crt
+  cert: /etc/nebula/host.crt
+  key: /etc/nebula/host.key
+  initiating_version: 2
+
+static_host_map:
+  "10.80.0.1": ["<LIGHTHOUSE_PUBLIC_IP>:4242"]
+
+lighthouse:
+  am_lighthouse: false
+  hosts:
+    - "10.80.0.1"
+
+relay:
+  relays:
+    - "10.80.0.1"
+  am_relay: false
+  use_relays: true
+
+listen:
+  host: 0.0.0.0
+  port: 0
+
+punchy:
+  punch: true
+  respond: true
+
+tun:
+  disabled: false
+
+firewall:
+  outbound:
+    - port: any
+      proto: any
+      host: any
+
+  inbound:
+    - port: any
+      proto: icmp
+      host: any
+    - port: 22
+      proto: tcp
+      group: laptops
+    - port: any
+      proto: any
+      group: servers
+
+logging:
+  level: info
+  format: text
+```
+
+This permits:
+
+- ICMP testing from overlay members.
+- SSH from certificates in the laptops group.
+- All overlay traffic between servers.
+- No other inbound overlay traffic.
+
+## Ubuntu Ryzen server setup
+
+Each server receives only:
+
+```
+ca.crt
+ryzen-N.crt
+ryzen-N.key
+```
+
+Rename its certificate and key to `host.crt` and `host.key` during installation.
+
+### Install Nebula
+
+```bash
+cd /tmp
+curl -fLO https://github.com/slackhq/nebula/releases/download/v1.11.2/nebula-linux-amd64.tar.gz
+curl -fLO https://github.com/slackhq/nebula/releases/download/v1.11.2/SHASUM256.txt
+grep ' nebula-linux-amd64.tar.gz$' SHASUM256.txt | sha256sum -c -
+mkdir -p nebula-v1.11.2
+tar -xzf nebula-linux-amd64.tar.gz -C nebula-v1.11.2
+sudo install -o root -g root -m 0755 nebula-v1.11.2/nebula /usr/local/bin/nebula
+```
+
+The official project distributes Linux, macOS, and Windows binaries and also documents distribution packages. https://nebula.defined.net/docs/guides/quick-start/?utm_source=chatgpt.com
+
+### Create the service account
+
+```bash
+sudo useradd --system --user-group --no-create-home --home-dir /nonexistent --shell /usr/sbin/nologin nebula
+```
+
+### Install credentials
+
+For ryzen-0, for example:
+
+```bash
+sudo install -d -o root -g nebula -m 0750 /etc/nebula
+sudo install -o root -g nebula -m 0640 ca.crt /etc/nebula/ca.crt
+sudo install -o root -g nebula -m 0640 ryzen-0.crt /etc/nebula/host.crt
+sudo install -o root -g nebula -m 0640 ryzen-0.key /etc/nebula/host.key
+```
+
+Use the matching certificate/key on each server.
+
+### Install and validate the configuration
+
+After creating `/etc/nebula/config.yml` from the server template:
+
+```bash
+sudo chown root:nebula /etc/nebula/config.yml
+sudo chmod 0640 /etc/nebula/config.yml
+sudo /usr/local/bin/nebula -test -config /etc/nebula/config.yml
+```
+
+### Create the systemd service
+
+Create `/etc/systemd/system/nebula.service`:
+
+```ini
+[Unit]
+Description=Nebula Overlay Client
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+User=nebula
+Group=nebula
+ExecStart=/usr/local/bin/nebula -config /etc/nebula/config.yml
+Restart=on-failure
+RestartSec=5
+AmbientCapabilities=CAP_NET_ADMIN
+CapabilityBoundingSet=CAP_NET_ADMIN
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
+```
+
+
+`CAP_NET_ADMIN` lets the unprivileged service create and configure its TUN interface. https://nebula.defined.net/docs/guides/running-nebula-as-non-root/?utm_source=chatgpt.com
+
+Start it:
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl enable --now nebula
+sudo systemctl status nebula --no-pager
+```
+
+## Laptop Configuration
+
+A laptop receives:
+
+```
+ca.crt
+<slack_id>.crt
+<slack_id>.key
+```
+
+Use this client policy:
+
+```yaml
+lighthouse:
+  am_lighthouse: false
+  hosts:
+    - "10.80.0.1"
+
+relay:
+  relays:
+    - "10.80.0.1"
+  am_relay: false
+  use_relays: true
+
+listen:
+  host: 0.0.0.0
+  port: 0
+
+punchy:
+  punch: true
+  respond: true
+
+tun:
+  disabled: false
+
+firewall:
+  outbound:
+    - port: any
+      proto: any
+      host: any
+
+  inbound:
+    - port: any
+      proto: icmp
+      group: servers
+
+logging:
+  level: info
+  format: text
+```
+
+Replace the three uppercase file placeholders with platform-specific absolute paths below.
+
+
+## MacOS laptop
+
+### Install
+
+```bash
+brew install nebula
+nebula -version
+```
+
+The official repository documents Homebrew installation. https://github.com/slackhq/nebula?utm_source=chatgpt.com
+
+The version must be at least `1.10` because these are `v2` certificates.
+
+### Install credentials
+
+```bash
+sudo install -d -o root -g wheel -m 0700 /etc/nebula
+sudo install -o root -g wheel -m 0600 ca.crt /etc/nebula/ca.crt
+sudo install -o root -g wheel -m 0600 <slack_id>.crt /etc/nebula/host.crt
+sudo install -o root -g wheel -m 0600 <slack_id>.key /etc/nebula/host.key
+```
+
+Use these paths in the configuration:
+
+```yaml
+pki:
+  ca: /etc/nebula/ca.crt
+  cert: /etc/nebula/host.crt
+  key: /etc/nebula/host.key
+```
+
+Save the complete laptop configuration as `/etc/nebula/config.yml`, then:
+
+```bash
+sudo chmod 0600 /etc/nebula/config.yml
+sudo nebula -test -config /etc/nebula/config.yml
+sudo nebula -service install -config /etc/nebula/config.yml
+sudo nebula -service start
+```
+
+
+## Windows laptop
+
+### Install files
+
+Download the official `nebula-windows-amd64.zip` for `v1.11.2` and extract nebula.exe to:
+
+```
+C:\Program Files\Nebula\nebula.exe
+```
+
+Place the credentials in:
+
+```
+C:\ProgramData\Nebula\ca.crt
+C:\ProgramData\Nebula\host.crt
+C:\ProgramData\Nebula\host.key
+```
+
+Save the configuration as:
+
+```
+C:\ProgramData\Nebula\config.yml
+```
+
+Use absolute Windows paths:
+
+```yaml
+pki:
+  ca: "C:\\ProgramData\\Nebula\\ca.crt"
+  cert: "C:\\ProgramData\\Nebula\\host.crt"
+  key: "C:\\ProgramData\\Nebula\\host.key"
+  initiating_version: 2
+```
+
+Absolute paths are important because the Windows service does not use the interactive shell’s working directory. https://github.com/slackhq/nebula/issues/1140?utm_source=chatgpt.com
+
+### Validate and install the service
+
+Run PowerShell as Administrator:
+
+```powershell
+& 'C:\Program Files\Nebula\nebula.exe' -test -config 'C:\ProgramData\Nebula\config.yml'
+& 'C:\Program Files\Nebula\nebula.exe' -service install -config 'C:\ProgramData\Nebula\config.yml'
+& 'C:\Program Files\Nebula\nebula.exe' -service start
+Get-Service Nebula
+```
+
+Nebula’s Windows service supports `-service install` and `-service start`. https://github.com/slackhq/nebula/discussions/1089?utm_source=chatgpt.com
+
+
+## Connectivity test
+
+After one Ryzen server and one laptop are running:
+
+```bash
+ping 10.80.0.10
+ssh <server-user>@10.80.0.10
+ssh <server-user>@ryzen-0
 ```
 
