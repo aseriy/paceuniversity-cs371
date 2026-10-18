@@ -339,10 +339,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#goal" class="md-nav__link">
+  <a href="#nebula" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Goal
+        Nebula
       
     </span>
   </a>
@@ -350,10 +350,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
+  <a href="#setting-up-nebula-lighthouse" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Prerequisites
+        Setting up Nebula Lighthouse
       
     </span>
   </a>
@@ -361,10 +361,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#design-decisions" class="md-nav__link">
+  <a href="#install-the-two-nebula-binaries-into-usrlocalbin" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Design decisions
+        Install the two Nebula binaries into /usr/local/bin:
       
     </span>
   </a>
@@ -372,10 +372,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#installation-and-configuration" class="md-nav__link">
+  <a href="#configuration" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Installation and configuration
+        Configuration
       
     </span>
   </a>
@@ -383,10 +383,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#verification" class="md-nav__link">
+  <a href="#ryzen-severs" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Verification
+        Ryzen Severs
       
     </span>
   </a>
@@ -394,10 +394,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#troubleshooting" class="md-nav__link">
+  <a href="#generate-laptop-certificates" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Troubleshooting
+        Generate Laptop Certificates
       
     </span>
   </a>
@@ -466,10 +466,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#goal" class="md-nav__link">
+  <a href="#nebula" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Goal
+        Nebula
       
     </span>
   </a>
@@ -477,10 +477,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
+  <a href="#setting-up-nebula-lighthouse" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Prerequisites
+        Setting up Nebula Lighthouse
       
     </span>
   </a>
@@ -488,10 +488,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#design-decisions" class="md-nav__link">
+  <a href="#install-the-two-nebula-binaries-into-usrlocalbin" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Design decisions
+        Install the two Nebula binaries into /usr/local/bin:
       
     </span>
   </a>
@@ -499,10 +499,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#installation-and-configuration" class="md-nav__link">
+  <a href="#configuration" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Installation and configuration
+        Configuration
       
     </span>
   </a>
@@ -510,10 +510,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#verification" class="md-nav__link">
+  <a href="#ryzen-severs" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Verification
+        Ryzen Severs
       
     </span>
   </a>
@@ -521,10 +521,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#troubleshooting" class="md-nav__link">
+  <a href="#generate-laptop-certificates" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Troubleshooting
+        Generate Laptop Certificates
       
     </span>
   </a>
@@ -549,18 +549,350 @@
 
 
 <h1 id="network-mesh">Network Mesh</h1>
-<h2 id="goal">Goal</h2>
-<p>What should be working when this stage is complete?</p>
-<h2 id="prerequisites">Prerequisites</h2>
-<p>What equipment, access, and previous steps are required?</p>
-<h2 id="design-decisions">Design decisions</h2>
-<p>What did we choose, and why?</p>
-<h2 id="installation-and-configuration">Installation and configuration</h2>
-<p>Steps, commands, and configuration examples.</p>
-<h2 id="verification">Verification</h2>
-<p>How do we demonstrate that it works? Include expected results.</p>
-<h2 id="troubleshooting">Troubleshooting</h2>
-<p>Problems encountered and how we resolved them.</p>
+<h2 id="nebula">Nebula</h2>
+<p>TODO: general info, deployment topology, why and how</p>
+<h2 id="setting-up-nebula-lighthouse">Setting up Nebula Lighthouse</h2>
+<p>AWS EC2 <code>t2.nano</code>:</p>
+<pre><code class="language-bash">$ uname -srmo
+Linux 6.14.0-1014-aws x86_64 GNU/Linux
+</code></pre>
+<pre><code class="language-bash">$ cat /etc/os-release
+PRETTY_NAME=&quot;Ubuntu 24.04.3 LTS&quot;
+NAME=&quot;Ubuntu&quot;
+VERSION_ID=&quot;24.04&quot;
+VERSION=&quot;24.04.3 LTS (Noble Numbat)&quot;
+VERSION_CODENAME=noble
+ID=ubuntu
+ID_LIKE=debian
+HOME_URL=&quot;https://www.ubuntu.com/&quot;
+SUPPORT_URL=&quot;https://help.ubuntu.com/&quot;
+BUG_REPORT_URL=&quot;https://bugs.launchpad.net/ubuntu/&quot;
+PRIVACY_POLICY_URL=&quot;https://www.ubuntu.com/legal/terms-and-policies/privacy-policy&quot;
+UBUNTU_CODENAME=noble
+LOGO=ubuntu-logo
+</code></pre>
+<p>Allocated storage:</p>
+<pre><code class="language-bash">$ df -hT / /data
+Filesystem     Type  Size  Used Avail Use% Mounted on
+/dev/root      ext4   96G  8.3G   88G   9% /
+/dev/xvdbb     ext4  196G   28K  186G   1% /data
+</code></pre>
+<p>Download the official archive and checksum file to <code>/tmp</code>:</p>
+<pre><code class="language-bash">curl -fL -o /tmp/nebula-linux-amd64.tar.gz https://github.com/slackhq/nebula/releases/download/v1.11.2/nebula-linux-amd64.tar.gz
+curl -fL -o /tmp/nebula-SHASUM256.txt https://github.com/slackhq/nebula/releases/download/v1.11.2/SHASUM256.txt
+</code></pre>
+<pre><code class="language-bash">-rw-rw-r-- 1 ubuntu ubuntu  18M Oct 17 18:22 nebula-linux-amd64.tar.gz
+-rw-rw-r-- 1 ubuntu ubuntu 6.7K Oct 17 18:22 nebula-SHASUM256.txt
+</code></pre>
+<p>Verify the downloaded archive against the official checksum:</p>
+<pre><code class="language-bash">cd /tmp &amp;&amp; grep ' nebula-linux-amd64.tar.gz$' nebula-SHASUM256.txt | sha256sum -c -
+</code></pre>
+<p>Expected result:</p>
+<pre><code class="language-bash">nebula-linux-amd64.tar.gz: OK
+</code></pre>
+<p>Extract the verified archive into its own temporary directory:</p>
+<pre><code class="language-bash">mkdir -p /tmp/nebula-v1.11.2
+tar -xzf /tmp/nebula-linux-amd64.tar.gz -C /tmp/nebula-v1.11.2
+</code></pre>
+<p>Inspect the extracted files before installing them:</p>
+<pre><code class="language-bash">$ ls -la /tmp/nebula-v1.11.2
+total 35824
+drwxrwxr-x  2 ubuntu ubuntu     4096 Oct 17 18:26 .
+drwxrwxrwt 13 root   root      20480 Oct 17 18:26 ..
+-rwxr-xr-x  1 ubuntu ubuntu 26317909 Sep 22 13:02 nebula
+-rwxr-xr-x  1 ubuntu ubuntu 10336960 Sep 22 13:02 nebula-cert
+</code></pre>
+<h2 id="install-the-two-nebula-binaries-into-usrlocalbin">Install the two Nebula binaries into <code>/usr/local/bin</code>:</h2>
+<pre><code class="language-bash">sudo install -o root -g root -m 0755 /tmp/nebula-v1.11.2/nebula /tmp/nebula-v1.11.2/nebula-cert /usr/local/bin/
+</code></pre>
+<pre><code class="language-bash">$ ls -ltrh /usr/local/bin/
+
+.........
+
+-rwxr-xr-x 1 root   root    26M Oct 17 18:31 nebula
+-rwxr-xr-x 1 root   root   9.9M Oct 17 18:31 nebula-cert
+</code></pre>
+<p>Verify both installed binaries and their versions:</p>
+<pre><code class="language-bash">$ /usr/local/bin/nebula -version &amp;&amp; /usr/local/bin/nebula-cert -version
+Version: 1.11.2
+Version: 1.11.2
+</code></pre>
+<p>We'll run Nebula as a dedicate user <code>nebula</code>, let's create it:</p>
+<pre><code class="language-bash">sudo useradd --system --user-group --no-create-home --home-dir /nonexistent --shell /usr/sbin/nologin nebula
+</code></pre>
+<pre><code class="language-bash">$ getent passwd nebula
+nebula:x:999:987::/nonexistent:/usr/sbin/nologin
+</code></pre>
+<p>Create the configuration directory so root controls its contents while the nebula group can read them:</p>
+<pre><code class="language-bash">sudo install -d -o root -g nebula -m 0750 /etc/nebula
+</code></pre>
+<h2 id="configuration">Configuration</h2>
+<p>Our chosen overlay subnet: <code>10.80.0.0/24</code> with the lighthouse overlay IP <code>10.80.0.1</code>.</p>
+<p>Create a protected PKI working directory in <code>ubunbu</code>'s home:</p>
+<pre><code class="language-bash">install -d -m 0700 /home/ubuntu/nebula-pki
+</code></pre>
+<p>Generate an encrypted v2 CA:</p>
+<pre><code class="language-bash">cd /home/ubuntu/nebula-pki
+nebula-cert ca -name &quot;Nebula 10.80.0.0/24 CA&quot; -duration 87600h -encrypt -argon-memory 65536 -argon-parallelism 2 -argon-iterations 3 -version 2
+</code></pre>
+<p>Then verify the certificates have been generated:</p>
+<pre><code class="language-bash">nebula-cert print -path /home/ubuntu/nebula-pki/ca.crt
+</code></pre>
+<p>The output should be something like:</p>
+<pre><code class="language-json">{
+    &quot;curve&quot;: &quot;CURVE25519&quot;,
+    &quot;details&quot;: {
+        &quot;groups&quot;: null,
+        &quot;isCa&quot;: true,
+        &quot;issuer&quot;: &quot;&quot;,
+        &quot;name&quot;: &quot;Nebula 10.80.0.0/24 CA&quot;,
+        &quot;networks&quot;: null,
+        &quot;notAfter&quot;: &quot;2036-10-14T19:42:29Z&quot;,
+        &quot;notBefore&quot;: &quot;2026-10-17T19:42:29Z&quot;,
+        &quot;unsafeNetworks&quot;: null
+    },
+    &quot;fingerprint&quot;: &quot;9423b6a87f3f196ca61ed981423b1bef03b596ea8c733a8d95d7aec9b5df8cb5&quot;,
+    &quot;publicKey&quot;: &quot;dd78e234cbb48a31b451cfc7567fc8d4778a60008b13cc9777e555e743093fa1&quot;,
+    &quot;signature&quot;: &quot;607bd6447070a4ee8d7147863f5c6f82236747a0e15eb3f8497a9dcb03879860928d8a114820ba47419c1cb7832d98c77e112d9713467f8f4d75ac0df6607806&quot;,
+    &quot;version&quot;: 2
+}
+</code></pre>
+<p>Next, issue the lighthouse certificate:</p>
+<pre><code class="language-bash">nebula-cert sign -ca-crt ca.crt -ca-key ca.key -name &quot;lighthouse&quot; -networks &quot;10.80.0.1/24&quot; -groups &quot;lighthouse&quot; -duration 8760h -version 2 -out-crt lighthouse.crt -out-key lighthouse.key
+</code></pre>
+<p>Verify the lighthouse certificate:</p>
+<pre><code class="language-bash">nebula-cert print -path lighthouse.crt
+</code></pre>
+<pre><code class="language-json">{
+    &quot;curve&quot;: &quot;CURVE25519&quot;,
+    &quot;details&quot;: {
+        &quot;groups&quot;: [
+            &quot;lighthouse&quot;
+        ],
+        &quot;isCa&quot;: false,
+        &quot;issuer&quot;: &quot;9423b6a87f3f196ca61ed981423b1bef03b596ea8c733a8d95d7aec9b5df8cb5&quot;,
+        &quot;name&quot;: &quot;lighthouse&quot;,
+        &quot;networks&quot;: [
+            &quot;10.80.0.1/24&quot;
+        ],
+        &quot;notAfter&quot;: &quot;2027-10-17T19:47:39Z&quot;,
+        &quot;notBefore&quot;: &quot;2026-10-17T19:47:39Z&quot;,
+        &quot;unsafeNetworks&quot;: null
+    },
+    &quot;fingerprint&quot;: &quot;ed873d21a84592d2a7c0a35789a5fc058270f1c68df05ab75d11697ed1c8b3f9&quot;,
+    &quot;publicKey&quot;: &quot;832a9f2999019a7cc2dedf55e134ef5e50fa50e36b44d09a8cbde612fbd35c0a&quot;,
+    &quot;signature&quot;: &quot;d25299d8bafa6df22275271b75ed73ecfe88a0852e3e2ceb304a88f3be11979d738cff78a66331208777e5a1c7c3cbe441bcfe15a94ee5668ac1af45119ac009&quot;,
+    &quot;version&quot;: 2
+}
+</code></pre>
+<p>Install only the lighthouse’s required files into <code>/etc/nebula</code>. This does not copy the CA private key:</p>
+<pre><code class="language-bash">sudo install -o root -g nebula -m 0640 /home/ubuntu/nebula-pki/ca.crt /home/ubuntu/nebula-pki/lighthouse.crt /home/ubuntu/nebula-pki/lighthouse.key /etc/nebula/
+</code></pre>
+<p>The lighthouse host will provide both discover and relay services. Create the configuration file <code>/etc/nebula/config.yml</code>:</p>
+<pre><code class="language-yaml">pki:
+  ca: /etc/nebula/ca.crt
+  cert: /etc/nebula/lighthouse.crt
+  key: /etc/nebula/lighthouse.key
+  initiating_version: 2
+
+static_host_map: {}
+
+lighthouse:
+  am_lighthouse: true
+  hosts: []
+
+relay:
+  am_relay: true
+  use_relays: false
+  relays: []
+
+listen:
+  host: 0.0.0.0
+  port: 4242
+
+tun:
+  disabled: false
+  dev: nebula1
+
+firewall:
+  outbound: []
+  inbound: []
+
+logging:
+  level: info
+  format: text
+</code></pre>
+<p>Set correct permissions on the config file:</p>
+<pre><code class="language-bash">sudo chown root:nebula /etc/nebula/config.yml
+sudo chmod 0640 /etc/nebula/config.yml
+</code></pre>
+<p>Validate this new config file:</p>
+<pre><code class="language-bash">$ sudo /usr/local/bin/nebula -test -config /etc/nebula/config.yml
+time=2026-10-17T20:06:20.563Z level=INFO msg=&quot;firewall:\n    inbound: []\n    outbound: []\nlighthouse:\n    am_lighthouse: true\n    hosts: []\nlisten:\n    host: 0.0.0.0\n    port: 4242\nlogging:\n    format: text\n    level: info\npki:\n    ca: /etc/nebula/ca.crt\n    cert: /etc/nebula/lighthouse.crt\n    initiating_version: 2\n    key: /etc/nebula/lighthouse.key\nrelay:\n    am_relay: true\n    relays: []\n    use_relays: false\nstatic_host_map: {}\ntun:\n    dev: nebula1\n    disabled: false\n&quot;
+time=2026-10-17T20:06:20.569Z level=INFO msg=&quot;Firewall started&quot; firewallHashes=SHA:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855,FNV:2166136261
+time=2026-10-17T20:06:20.569Z level=INFO msg=&quot;Main HostMap created&quot; preferredRanges=[]
+time=2026-10-17T20:06:20.570Z level=INFO msg=&quot;punchy disabled&quot;
+</code></pre>
+<p>Create the systemd service <code>/etc/systemd/system/nebula.service</code>:</p>
+<pre><code class="language-ini">[Unit]
+Description=Nebula Lighthouse and Relay
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+User=nebula
+Group=nebula
+ExecStart=/usr/local/bin/nebula -config /etc/nebula/config.yml
+Restart=on-failure
+RestartSec=5
+AmbientCapabilities=CAP_NET_ADMIN
+CapabilityBoundingSet=CAP_NET_ADMIN
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
+</code></pre>
+<p>Reload systemd so it recognizes the new service:</p>
+<pre><code class="language-bash">sudo systemctl daemon-reload
+</code></pre>
+<p>Start Nebula and check whether it started successfully:</p>
+<pre><code class="language-bash">sudo systemctl start nebula
+sudo systemctl status nebula --no-pager
+
+● nebula.service - Nebula Lighthouse and Relay
+     Loaded: loaded (/etc/systemd/system/nebula.service; disabled; preset: enabled)
+     Active: active (running) since Sat 2026-10-17 20:10:20 UTC; 28s ago
+   Main PID: 4336 (nebula)
+      Tasks: 7 (limit: 517)
+     Memory: 9.9M (peak: 10.1M)
+        CPU: 53ms
+     CGroup: /system.slice/nebula.service
+             └─4336 /usr/local/bin/nebula -config /etc/nebula/config.yml
+
+Oct 17 20:10:20 ip-172-31-32-174 systemd[1]: Started nebula.service - Nebula Lighthouse and Relay.
+Oct 17 20:10:20 ip-172-31-32-174 nebula[4336]: time=2026-10-17T20:10:20.241Z level=INFO msg=&quot;Firewall started&quot; firewallHashes=SHA:e3b0c44298fc1c149…:2166136261
+Oct 17 20:10:20 ip-172-31-32-174 nebula[4336]: time=2026-10-17T20:10:20.246Z level=INFO msg=listening addr=0.0.0.0:4242
+Oct 17 20:10:20 ip-172-31-32-174 nebula[4336]: time=2026-10-17T20:10:20.246Z level=INFO msg=&quot;Main HostMap created&quot; preferredRanges=[]
+Oct 17 20:10:20 ip-172-31-32-174 nebula[4336]: time=2026-10-17T20:10:20.246Z level=INFO msg=&quot;punchy disabled&quot;
+Oct 17 20:10:20 ip-172-31-32-174 nebula[4336]: time=2026-10-17T20:10:20.246Z level=INFO msg=&quot;Loaded send_recv_error config&quot; sendRecvError=always
+Oct 17 20:10:20 ip-172-31-32-174 nebula[4336]: time=2026-10-17T20:10:20.246Z level=INFO msg=&quot;Loaded accept_recv_error config&quot; acceptRecvError=always
+Oct 17 20:10:20 ip-172-31-32-174 nebula[4336]: time=2026-10-17T20:10:20.247Z level=INFO msg=&quot;Nebula interface is active&quot; interface=nebula1 networks…rypto=false
+Hint: Some lines were ellipsized, use -l to show in full.
+</code></pre>
+<p>Verify Nebula is listening on UDP port <code>4242</code>:</p>
+<pre><code class="language-bash">$ sudo ss -lunp | grep ':4242'
+UNCONN 0      0                 0.0.0.0:4242      0.0.0.0:*    users:((&quot;nebula&quot;,pid=4336,fd=7))
+</code></pre>
+<p>Enable it at boot:</p>
+<pre><code class="language-bash">$ sudo systemctl enable nebula
+Created symlink /etc/systemd/system/multi-user.target.wants/nebula.service → /etc/systemd/system/nebula.service.
+</code></pre>
+<p>Add this inbound rule to the EC2 instance’s security group:</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Protocol</th>
+<th style="text-align: right;">Port</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Custom UDP</td>
+<td>UDP</td>
+<td style="text-align: right;">4242</td>
+<td><code>0.0.0.0/0</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="ryzen-severs">Ryzen Severs</h2>
+<p>The lighthouse and relay are ready.
+Next is issuing the six server certificates. Planned overlay addresses:</p>
+<table>
+<thead>
+<tr>
+<th>Server</th>
+<th>Nebula overlay IP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ryzen-0</code></td>
+<td><code>10.80.0.10/24</code></td>
+</tr>
+<tr>
+<td><code>ryzen-1</code></td>
+<td><code>10.80.0.11/24</code></td>
+</tr>
+<tr>
+<td><code>ryzen-2</code></td>
+<td><code>10.80.0.12/24</code></td>
+</tr>
+<tr>
+<td><code>ryzen-3</code></td>
+<td><code>10.80.0.13/24</code></td>
+</tr>
+<tr>
+<td><code>ryzen-4</code></td>
+<td><code>10.80.0.14/24</code></td>
+</tr>
+<tr>
+<td><code>ryzen-5</code></td>
+<td><code>10.80.0.15/24</code></td>
+</tr>
+</tbody>
+</table>
+<p>Generate the first server certificate:</p>
+<pre><code class="language-bash">cd /home/ubuntu/nebula-pki
+nebula-cert sign -ca-crt ca.crt -ca-key ca.key -name &quot;ryzen-0&quot; -networks &quot;10.80.0.10/24&quot; -groups &quot;servers&quot; -duration 8760h -version 2 -out-crt ryzen-0.crt -out-key ryzen-0.key
+nebula-cert sign -ca-crt ca.crt -ca-key ca.key -name &quot;ryzen-1&quot; -networks &quot;10.80.0.11/24&quot; -groups &quot;servers&quot; -duration 8760h -version 2 -out-crt ryzen-1.crt -out-key ryzen-1.key
+nebula-cert sign -ca-crt ca.crt -ca-key ca.key -name &quot;ryzen-2&quot; -networks &quot;10.80.0.12/24&quot; -groups &quot;servers&quot; -duration 8760h -version 2 -out-crt ryzen-2.crt -out-key ryzen-2.key
+nebula-cert sign -ca-crt ca.crt -ca-key ca.key -name &quot;ryzen-3&quot; -networks &quot;10.80.0.13/24&quot; -groups &quot;servers&quot; -duration 8760h -version 2 -out-crt ryzen-3.crt -out-key ryzen-3.key
+nebula-cert sign -ca-crt ca.crt -ca-key ca.key -name &quot;ryzen-4&quot; -networks &quot;10.80.0.14/24&quot; -groups &quot;servers&quot; -duration 8760h -version 2 -out-crt ryzen-4.crt -out-key ryzen-4.key
+nebula-cert sign -ca-crt ca.crt -ca-key ca.key -name &quot;ryzen-5&quot; -networks &quot;10.80.0.15/24&quot; -groups &quot;servers&quot; -duration 8760h -version 2 -out-crt ryzen-5.crt -out-key ryzen-5.key
+</code></pre>
+<p>Verify that all six certificate/key pairs exist:</p>
+<pre><code class="language-bash">ls -l /home/ubuntu/nebula-pki/ryzen-{0..5}.{crt,key}
+</code></pre>
+<p>All six server certificate/key pairs exist with secure 0600 permissions.</p>
+<pre><code class="language-bash">-rw------- 1 ubuntu ubuntu 318 Oct 18 06:48 /home/ubuntu/nebula-pki/ryzen-0.crt
+-rw------- 1 ubuntu ubuntu 127 Oct 18 06:48 /home/ubuntu/nebula-pki/ryzen-0.key
+-rw------- 1 ubuntu ubuntu 318 Oct 18 07:13 /home/ubuntu/nebula-pki/ryzen-1.crt
+-rw------- 1 ubuntu ubuntu 127 Oct 18 07:13 /home/ubuntu/nebula-pki/ryzen-1.key
+-rw------- 1 ubuntu ubuntu 318 Oct 18 07:13 /home/ubuntu/nebula-pki/ryzen-2.crt
+-rw------- 1 ubuntu ubuntu 127 Oct 18 07:13 /home/ubuntu/nebula-pki/ryzen-2.key
+-rw------- 1 ubuntu ubuntu 318 Oct 18 07:13 /home/ubuntu/nebula-pki/ryzen-3.crt
+-rw------- 1 ubuntu ubuntu 127 Oct 18 07:13 /home/ubuntu/nebula-pki/ryzen-3.key
+-rw------- 1 ubuntu ubuntu 318 Oct 18 07:13 /home/ubuntu/nebula-pki/ryzen-4.crt
+-rw------- 1 ubuntu ubuntu 127 Oct 18 07:13 /home/ubuntu/nebula-pki/ryzen-4.key
+-rw------- 1 ubuntu ubuntu 318 Oct 18 07:13 /home/ubuntu/nebula-pki/ryzen-5.crt
+-rw------- 1 ubuntu ubuntu 127 Oct 18 07:13 /home/ubuntu/nebula-pki/ryzen-5.key
+</code></pre>
+<h2 id="generate-laptop-certificates">Generate Laptop Certificates</h2>
+<p>The laptop overlay IPs start at <code>10.80.0.100/24</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Owner ID</th>
+<th>Nebula IP</th>
+<th>Group</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>jo14591n</code></td>
+<td><code>10.80.0.100/24</code></td>
+<td><code>laptops</code></td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-bash">nebula-cert sign -ca-crt ca.crt -ca-key ca.key -name &quot;jo14591n&quot; -networks &quot;10.80.0.100/24&quot; -groups &quot;laptops&quot; -duration 8760h -version 2 -out-crt jo14591n.crt -out-key jo14591n.key
+</code></pre>
 
 
 
