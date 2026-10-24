@@ -8,5 +8,6 @@ nav:
   - Hardware: hardware.md
   - Operating System: operating-system.md
   - Network Mesh: network-mesh.md
+  - Cloud Infrastructure: cloud-infra.md
   - CockroachDB: cockroachdb.md
 
