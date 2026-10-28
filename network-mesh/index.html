@@ -820,10 +820,10 @@ Hint: Some lines were ellipsized, use -l to show in full.
 </code></pre>
 <p>Verify Nebula is listening on UDP port <code>4242</code>:</p>
 <pre><code class="language-bash">$ sudo ss -lunp | grep -E ':(53|4242)\b'
-UNCONN 0      0               10.80.0.1:53        0.0.0.0:*    users:((&quot;nebula&quot;,pid=10122,fd=9))                        
-UNCONN 0      0              127.0.0.54:53        0.0.0.0:*    users:((&quot;systemd-resolve&quot;,pid=329,fd=16))                
-UNCONN 0      0           127.0.0.53%lo:53        0.0.0.0:*    users:((&quot;systemd-resolve&quot;,pid=329,fd=14))                
-UNCONN 0      0                 0.0.0.0:4242      0.0.0.0:*    users:((&quot;nebula&quot;,pid=10122,fd=7))  
+UNCONN 0      0               10.80.0.1:53        0.0.0.0:*    users:((&quot;nebula&quot;,pid=10122,fd=9))
+UNCONN 0      0              127.0.0.54:53        0.0.0.0:*    users:((&quot;systemd-resolve&quot;,pid=329,fd=16))
+UNCONN 0      0           127.0.0.53%lo:53        0.0.0.0:*    users:((&quot;systemd-resolve&quot;,pid=329,fd=14))
+UNCONN 0      0                 0.0.0.0:4242      0.0.0.0:*    users:((&quot;nebula&quot;,pid=10122,fd=7))
 </code></pre>
 <p>Enable it at boot:</p>
 <pre><code class="language-bash">$ sudo systemctl enable nebula
@@ -1163,6 +1163,139 @@ Get-Service Nebula
 ssh &lt;server-user&gt;@10.80.0.10
 ssh &lt;server-user&gt;@ryzen-0
 </code></pre>
+<hr />
+<h2 id="ryzen-and-macbook-client-setup">Ryzen and MacBook Client Setup</h2>
+<h2 id="goal">Goal</h2>
+<p>Establish secure remote connectivity between the CS371 Ryzen servers and student laptops using Nebula VPN.</p>
+<p>The network mesh allows students to administer their Linux servers from different networks without exposing SSH directly to the public internet.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+<li>Lenovo ThinkCentre M715q running Ubuntu 24.04.5 LTS</li>
+<li>MacBook running macOS</li>
+<li>Internet connectivity on both devices</li>
+<li>Nebula VPN v1.11.2 installed on both devices</li>
+<li>Nebula certificates and private keys provided for each device</li>
+<li>Access to the CS371 Nebula lighthouse</li>
+<li>OpenSSH server configured on Ubuntu</li>
+<li>SSH public-key authentication</li>
+</ul>
+<h2 id="design-decisions">Design decisions</h2>
+<p>We selected Nebula VPN to establish encrypted connectivity between devices across different networks.</p>
+<p>The network uses the following Nebula IP addresses:</p>
+<table>
+<thead>
+<tr>
+<th>Device</th>
+<th>Nebula IP</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Lighthouse</td>
+<td>10.80.0.1</td>
+<td>Peer discovery</td>
+</tr>
+<tr>
+<td>Ryzen (<code>ryzen-0</code>)</td>
+<td>10.80.0.10</td>
+<td>Linux server</td>
+</tr>
+<tr>
+<td>MacBook (<code>bayron</code>)</td>
+<td>10.80.0.101</td>
+<td>Remote administration</td>
+</tr>
+</tbody>
+</table>
+<p>The Ryzen runs Nebula as a systemd service, while the MacBook currently runs Nebula manually.</p>
+<p>SSH access is restricted through Nebula firewall rules.</p>
+<h2 id="installation-and-configuration">Installation and configuration</h2>
+<h3 id="1-install-nebula">1. Install Nebula</h3>
+<p>Install Nebula v1.11.2 on the Ryzen and MacBook.</p>
+<p>Place the appropriate certificate, private key, and CA certificate in <code>/etc/nebula/</code> on each device.</p>
+<p>Never commit private keys or certificates containing sensitive information to GitHub.</p>
+<h3 id="2-configure-nebula">2. Configure Nebula</h3>
+<p>Both devices use <code>/etc/nebula/config.yml</code>.</p>
+<p>The configuration includes the lighthouse, device certificates, VPN interface, and firewall rules.</p>
+<p>The Ryzen's inbound firewall configuration includes:</p>
+<pre><code class="language-yaml">firewall:
+  outbound:
+    - port: any
+      proto: any
+      host: any
+
+  inbound:
+    - port: any
+      proto: icmp
+      host: any
+
+    - port: 22
+      proto: tcp
+      host: bayron
+
+    - port: 22
+      proto: tcp
+      group: servers
+</code></pre>
+<p>The <code>host: bayron</code> rule matches the MacBook's Nebula certificate identity.</p>
+<h3 id="3-start-nebula-on-ubuntu">3. Start Nebula on Ubuntu</h3>
+<pre><code class="language-bash">sudo systemctl enable nebula
+sudo systemctl restart nebula
+sudo systemctl status nebula
+</code></pre>
+<h3 id="4-start-nebula-on-macos">4. Start Nebula on macOS</h3>
+<pre><code class="language-bash">sudo nebula -config /etc/nebula/config.yml
+</code></pre>
+<p>Keep this process running while using the VPN.</p>
+<h2 id="verification">Verification</h2>
+<h3 id="test-nebula-connectivity">Test Nebula connectivity</h3>
+<p>From the MacBook:</p>
+<pre><code class="language-bash">ping -c 4 10.80.0.10
+</code></pre>
+<p>Expected result: Successful ICMP replies.</p>
+<h3 id="test-ssh-connectivity">Test SSH connectivity</h3>
+<pre><code class="language-bash">nc -vz -w 5 10.80.0.10 22
+</code></pre>
+<p>Expected result:</p>
+<pre><code class="language-text">Connection to 10.80.0.10 port 22 [tcp/ssh] succeeded!
+</code></pre>
+<h3 id="connect-remotely">Connect remotely</h3>
+<pre><code class="language-bash">ssh -i ~/.ssh/id_ed25519 milkalmond@10.80.0.10
+</code></pre>
+<p>Expected result:</p>
+<pre><code class="language-text">milkalmond@cs371-bc9b0c:~$
+</code></pre>
+<p>Remote SSH connectivity was successfully verified from a separate internet connection outside the home network.</p>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="ssh-connection-timed-out">SSH connection timed out</h3>
+<p>Initially, Nebula ICMP ping succeeded, but SSH connections to port 22 timed out.</p>
+<p>We enabled debug logging and inspected the Ryzen's Nebula logs:</p>
+<pre><code class="language-bash">sudo journalctl -u nebula --since &quot;10 minutes ago&quot; --no-pager
+</code></pre>
+<p>The logs reported:</p>
+<pre><code class="language-text">dropping inbound packet
+reason=&quot;no matching rule in firewall table&quot;
+</code></pre>
+<p>The original firewall configuration used:</p>
+<pre><code class="language-yaml">groups:
+  - laptops
+  - servers
+</code></pre>
+<p>This required the connecting peer to match both groups.</p>
+<p>We corrected the configuration by using the MacBook's certificate identity:</p>
+<pre><code class="language-yaml">- port: 22
+  proto: tcp
+  host: bayron
+</code></pre>
+<p>After restarting Nebula, TCP port 22 became reachable and SSH authentication succeeded.</p>
+<h3 id="ssh-key-authentication">SSH key authentication</h3>
+<p>The SSH private key must be available on the client device initiating the connection.</p>
+<p>For this setup, the private key is stored on the MacBook at:</p>
+<pre><code class="language-text">~/.ssh/id_ed25519
+</code></pre>
+<h3 id="security-considerations">Security considerations</h3>
+<p>Private keys must not be uploaded to the repository. Any previously exposed Nebula private keys should be rotated before production or sensitive use.</p>
 
 
 

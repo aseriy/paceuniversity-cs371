@@ -663,22 +663,26 @@
 <li><code>usb.ipxe</code> — embedded in the USB image. Obtains a DHCP lease and chains to the current <code>bootstrap.ipxe</code> on GitHub.</li>
 <li><code>bootstrap.ipxe</code> — downloads the Ubuntu 24.04.5 netboot kernel and initrd from <code>https://releases.ubuntu.com/24.04.5</code>, boots the live-server ISO over HTTPS, and passes <code>autoinstall ds=nocloud-net</code> with the seed URL pointing at this repository's <code>provisioning/autoinstall/</code>. The <code>set semicolon:hex 3b</code> line embeds the literal <code>;</code> that the NoCloud datasource syntax requires in the kernel command line.</li>
 <li><code>autoinstall/user-data</code> — the autoinstall configuration:<ul>
-<li>creates the <code>admin</code> user with a locked password (<code>"!"</code>);</li>
-<li>installs the SSH server with password login disabled and the authorized key from the <code>authorized-keys</code> list (currently the <code>ssh-ed25519 YOUR_PUBLIC_KEY</code> placeholder);</li>
+<li>creates the <code>milkalmond</code> user with a locked password (<code>"!"</code>);</li>
+<li>installs the SSH server with password login disabled and public-key authentication enabled;</li>
 <li>installs Ubuntu directly to the SSD (<code>storage: layout: name: direct</code>);</li>
 <li>installs <code>git</code> and <code>curl</code>;</li>
-<li>in <code>late-commands</code>, derives the hostname from the default-route interface's MAC address and writes it into <code>/target/etc/hostname</code> and <code>/target/etc/hosts</code>.</li>
+<li>in <code>late-commands</code>, derives the hostname from the default-route interface's MAC address and writes it into <code>/target/etc/hostname</code> and <code>/target/etc/hosts</code>;</li>
+<li>creates <code>/target/etc/issue.d/ip.issue</code> so the current IPv4 address is displayed on the console login screen.</li>
 </ul>
 </li>
 <li><code>autoinstall/meta-data</code> — empty, but must exist for the NoCloud datasource to accept the seed.</li>
 </ul>
 <h2 id="verification">Verification</h2>
-<p>The first full boot test on the Lenovo hardware is still pending. Expected results:</p>
+<p>Our team completed a full provisioning test on the Lenovo Ryzen hardware.</p>
 <ol>
-<li>The machine boots from the USB, iPXE obtains DHCP, and fetches <code>bootstrap.ipxe</code> from GitHub.</li>
-<li>The installer downloads the kernel, initrd, and ISO from <code>releases.ubuntu.com</code> and runs the autoinstall to completion with no prompts.</li>
-<li>The machine reboots as <code>cs371-&lt;last 6 hex digits of its MAC&gt;</code>.</li>
-<li>SSH as <code>admin</code> with the authorized key succeeds; password login is refused.</li>
+<li>The machine successfully booted from the USB, iPXE obtained a DHCP lease, and fetched <code>bootstrap.ipxe</code> from GitHub.</li>
+<li>The installer downloaded the Ubuntu 24.04.5 kernel, initrd, and live-server ISO from <code>releases.ubuntu.com</code> and completed the autoinstall.</li>
+<li>The machine rebooted successfully as <code>cs371-bc9b0c</code>, generated from the last six hexadecimal digits of the Ethernet MAC address <code>6c:4b:90:bc:9b:0c</code>.</li>
+<li>Ubuntu 24.04.5 rejected the originally configured <code>admin</code> username because it is reserved by the system. Our team changed the autoinstall username to <code>milkalmond</code>, which allowed provisioning to complete successfully.</li>
+<li>SSH public-key authentication to <code>milkalmond@cs371-bc9b0c</code> was successfully verified from a separate laptop.</li>
+<li>Password-based SSH authentication was tested separately and correctly returned <code>Permission denied (publickey)</code>.</li>
+<li>The console IP display was successfully tested using <code>/etc/issue.d/ip.issue</code>. After DHCP completed, the login screen displayed the machine's current IPv4 address, allowing the SSH destination to be identified without checking the DHCP server or router.</li>
 </ol>
 <h2 id="troubleshooting">Troubleshooting</h2>
 <p>Problems encountered and how we resolved them.</p>
