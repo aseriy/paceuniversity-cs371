@@ -385,6 +385,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Prerequisites">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#network-information" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Network information
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -395,6 +412,45 @@
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Design decisions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#manager-and-worker-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Manager and worker architecture
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#private-networking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Private networking
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#planned-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Planned services
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -407,6 +463,100 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Installation and configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-verify-docker-installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Verify Docker installation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-identify-the-nebula-network-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Identify the Nebula network interface
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-configure-nebula-firewall" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Configure Nebula firewall
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-initialize-docker-swarm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Initialize Docker Swarm
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-join-worker-nodes-pending" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Join worker nodes (pending)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-configure-private-docker-registry-pending" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Configure private Docker registry (pending)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-configure-swarm-visualizer-pending" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Configure Swarm Visualizer (pending)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-deploy-sample-application-pending" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Deploy sample application (pending)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -418,6 +568,56 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Verification">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#docker-engine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Docker Engine
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#swarm-manager" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Swarm manager
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advertised-manager-address" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Advertised manager address
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nebula-firewall" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nebula firewall
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -428,6 +628,67 @@
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Troubleshooting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nebula-firewall-initially-blocked-swarm-ports" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nebula firewall initially blocked Swarm ports
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#missing-tcp-2377-rule" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Missing TCP 2377 rule
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remote-nebula-restart-risk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Remote Nebula restart risk
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#protected-configuration-directory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Protected configuration directory
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outstanding-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outstanding work
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -512,6 +773,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Prerequisites">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#network-information" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Network information
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -522,6 +800,45 @@
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Design decisions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#manager-and-worker-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Manager and worker architecture
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#private-networking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Private networking
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#planned-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Planned services
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -534,6 +851,100 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Installation and configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-verify-docker-installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Verify Docker installation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-identify-the-nebula-network-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Identify the Nebula network interface
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-configure-nebula-firewall" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Configure Nebula firewall
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-initialize-docker-swarm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Initialize Docker Swarm
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-join-worker-nodes-pending" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Join worker nodes (pending)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-configure-private-docker-registry-pending" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Configure private Docker registry (pending)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-configure-swarm-visualizer-pending" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Configure Swarm Visualizer (pending)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-deploy-sample-application-pending" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Deploy sample application (pending)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -545,6 +956,56 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Verification">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#docker-engine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Docker Engine
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#swarm-manager" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Swarm manager
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advertised-manager-address" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Advertised manager address
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nebula-firewall" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nebula firewall
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -555,6 +1016,67 @@
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Troubleshooting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nebula-firewall-initially-blocked-swarm-ports" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nebula firewall initially blocked Swarm ports
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#missing-tcp-2377-rule" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Missing TCP 2377 rule
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remote-nebula-restart-risk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Remote Nebula restart risk
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#protected-configuration-directory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Protected configuration directory
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outstanding-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outstanding work
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -577,17 +1099,233 @@
 
 <h1 id="cloud-infrastructure">Cloud Infrastructure</h1>
 <h2 id="goal">Goal</h2>
-<p>What should be working when this stage is complete?</p>
+<p>Build a private, multi-node Docker Swarm cluster for the CS371 project using the existing Nebula VPN mesh.</p>
+<p>The completed infrastructure should support:</p>
+<ol>
+<li>Docker Engine installed and operational on each server.</li>
+<li><code>ryzen-0</code> configured as the Docker Swarm manager.</li>
+<li>Additional Ryzen servers joined as worker nodes.</li>
+<li>A private Docker image registry running on the manager.</li>
+<li>Docker Swarm Visualizer running on the manager.</li>
+<li>Deployment of a sample application across multiple nodes using a Docker Compose YAML file and <code>docker stack deploy</code>.</li>
+</ol>
+<p><strong>Current status:</strong> The manager is operational. Worker enrollment, registry, Visualizer, and multi-node deployment remain pending.</p>
 <h2 id="prerequisites">Prerequisites</h2>
-<p>What equipment, access, and previous steps are required?</p>
+<ul>
+<li>Lenovo ThinkCentre Ryzen server (<code>ryzen-0</code>).</li>
+<li>Ubuntu 24.04.5 LTS.</li>
+<li>Docker Engine 29.1.3.</li>
+<li>Nebula VPN installed and configured.</li>
+<li>Nebula certificate assigned to the <code>servers</code> group.</li>
+<li>SSH access to the server.</li>
+<li>Administrative privileges through <code>sudo</code>.</li>
+<li>Additional servers with Docker and Nebula for future worker enrollment.</li>
+</ul>
+<h3 id="network-information">Network information</h3>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Address</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ryzen-0</code> Nebula VPN</td>
+<td><code>10.80.0.10</code></td>
+</tr>
+<tr>
+<td><code>ryzen-0</code> home LAN (observed)</td>
+<td><code>192.168.4.30</code></td>
+</tr>
+<tr>
+<td>Nebula lighthouse</td>
+<td><code>10.80.0.1</code></td>
+</tr>
+<tr>
+<td>MacBook Nebula VPN</td>
+<td><code>10.80.0.101</code></td>
+</tr>
+</tbody>
+</table>
+<p>The home LAN address may change through DHCP. The Nebula address is used for Swarm communication.</p>
 <h2 id="design-decisions">Design decisions</h2>
-<p>What did we choose, and why?</p>
+<h3 id="manager-and-worker-architecture">Manager and worker architecture</h3>
+<p><code>ryzen-0</code> is the initial Docker Swarm manager.</p>
+<p>Additional Ryzen servers will join as worker nodes once their operating systems, Docker installations, Nebula certificates, and networking are ready.</p>
+<p>A single-manager Swarm is sufficient for initial testing but does not provide manager high availability.</p>
+<h3 id="private-networking">Private networking</h3>
+<p>Docker Swarm communicates over the existing Nebula VPN mesh.</p>
+<p>The manager advertises <code>10.80.0.10</code>, avoiding dependence on its home LAN address.</p>
+<p>Swarm communication ports are restricted to Nebula nodes belonging to the <code>servers</code> group.</p>
+<p>The Docker Swarm ports should not be exposed publicly through the home router.</p>
+<h3 id="planned-services">Planned services</h3>
+<p>The manager will host a Docker registry and Swarm Visualizer.</p>
+<p>The project will reference the <code>aseriy/cockroachdb-sandbox</code> GitHub repository for deployment examples.</p>
+<p>Registry storage, access controls, Visualizer deployment, and the test application have not yet been implemented.</p>
 <h2 id="installation-and-configuration">Installation and configuration</h2>
-<p>Steps, commands, and configuration examples.</p>
+<h3 id="1-verify-docker-installation">1. Verify Docker installation</h3>
+<p>On <code>ryzen-0</code>:</p>
+<pre><code class="language-bash">docker info --format 'Docker: {{.ServerVersion}} | Swarm: {{.Swarm.LocalNodeState}}'
+</code></pre>
+<p>Initial observed result:</p>
+<pre><code class="language-text">Docker: 29.1.3 | Swarm: inactive
+</code></pre>
+<p>Test container execution:</p>
+<pre><code class="language-bash">docker run --rm hello-world
+</code></pre>
+<p>Observed result:</p>
+<pre><code class="language-text">Hello from Docker!
+</code></pre>
+<p>This confirmed that Docker could contact its daemon, download an image, and execute a container.</p>
+<h3 id="2-identify-the-nebula-network-interface">2. Identify the Nebula network interface</h3>
+<pre><code class="language-bash">ip -br addr
+</code></pre>
+<p>Observed Nebula interface:</p>
+<pre><code class="language-text">tun0 UNKNOWN 10.80.0.10/24
+</code></pre>
+<h3 id="3-configure-nebula-firewall">3. Configure Nebula firewall</h3>
+<p>File:</p>
+<pre><code class="language-text">/etc/nebula/config.yml
+</code></pre>
+<p>The following inbound rules were added while preserving the existing SSH and ICMP rules:</p>
+<pre><code class="language-yaml">    # Docker Swarm manager communication
+    - port: 2377
+      proto: tcp
+      group: servers
+
+    # Docker Swarm node communication
+    - port: 7946
+      proto: tcp
+      group: servers
+
+    - port: 7946
+      proto: udp
+      group: servers
+
+    # Docker Swarm overlay networking
+    - port: 4789
+      proto: udp
+      group: servers
+</code></pre>
+<p>Validate the configuration:</p>
+<pre><code class="language-bash">sudo nebula -config /etc/nebula/config.yml -test
+</code></pre>
+<p>The configuration passed validation.</p>
+<p>The Nebula service was restarted after preparing a timed rollback mechanism. Remote SSH connectivity was restored, and the rollback timer was canceled.</p>
+<p>The service logs confirmed that all four Swarm firewall rules were loaded.</p>
+<p>Worker nodes will also require appropriate inbound Nebula rules for inter-node communication.</p>
+<h3 id="4-initialize-docker-swarm">4. Initialize Docker Swarm</h3>
+<p>On <code>ryzen-0</code>:</p>
+<pre><code class="language-bash">docker swarm init --advertise-addr 10.80.0.10
+</code></pre>
+<p>Docker confirmed that the Swarm was initialized.</p>
+<p>The worker join token must be treated as a secret. Do not commit it to GitHub or include it in this document.</p>
+<h3 id="5-join-worker-nodes-pending">5. Join worker nodes (pending)</h3>
+<p>After <code>ryzen-1</code> is ready, retrieve the worker join command on the manager:</p>
+<pre><code class="language-bash">docker swarm join-token worker
+</code></pre>
+<p>Execute the resulting join command on the worker without publishing its token.</p>
+<p>Confirm that the worker can communicate with the manager through Nebula and that required firewall rules are in place.</p>
+<p>Verify enrollment from the manager:</p>
+<pre><code class="language-bash">docker node ls
+</code></pre>
+<h3 id="6-configure-private-docker-registry-pending">6. Configure private Docker registry (pending)</h3>
+<p>Deploy a private registry on the manager after determining the storage location, network access, and authentication or transport-security requirements.</p>
+<p>Reference:</p>
+<p>https://github.com/aseriy/cockroachdb-sandbox</p>
+<h3 id="7-configure-swarm-visualizer-pending">7. Configure Swarm Visualizer (pending)</h3>
+<p>Deploy a visualization service to inspect Swarm nodes and scheduled containers.</p>
+<p>Reference:</p>
+<p>https://github.com/aseriy/cockroachdb-sandbox</p>
+<h3 id="8-deploy-sample-application-pending">8. Deploy sample application (pending)</h3>
+<p>Create a Compose-compatible YAML file defining a small application with Swarm-compatible service configuration.</p>
+<p>Deploy it using:</p>
+<pre><code class="language-bash">docker stack deploy -c compose.yaml cs371-test
+</code></pre>
+<p>Verify service placement:</p>
+<pre><code class="language-bash">docker stack services cs371-test
+docker service ls
+docker service ps cs371-test_app
+</code></pre>
+<p>The final command assumes the example defines a service named <code>app</code>; update it to match the actual service name.</p>
 <h2 id="verification">Verification</h2>
-<p>How do we demonstrate that it works? Include expected results.</p>
+<h3 id="docker-engine">Docker Engine</h3>
+<pre><code class="language-bash">docker run --rm hello-world
+</code></pre>
+<p>Result: Successful.</p>
+<h3 id="swarm-manager">Swarm manager</h3>
+<pre><code class="language-bash">docker node ls
+</code></pre>
+<p>Observed output:</p>
+<pre><code class="language-text">HOSTNAME       STATUS   AVAILABILITY   MANAGER STATUS   ENGINE VERSION
+cs371-bc9b0c   Ready    Active         Leader           29.1.3
+</code></pre>
+<h3 id="advertised-manager-address">Advertised manager address</h3>
+<pre><code class="language-bash">docker info --format 'Swarm: {{.Swarm.LocalNodeState}} | Manager IP: {{.Swarm.NodeAddr}} | Managers: {{.Swarm.Managers}} | Nodes: {{.Swarm.Nodes}}'
+</code></pre>
+<p>Observed result:</p>
+<pre><code class="language-text">Swarm: active | Manager IP: 10.80.0.10 | Managers: 1 | Nodes: 1
+</code></pre>
+<h3 id="nebula-firewall">Nebula firewall</h3>
+<p>The Nebula service logs confirmed the following inbound rules for the <code>servers</code> group:</p>
+<table>
+<thead>
+<tr>
+<th>Port</th>
+<th>Protocol</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2377</td>
+<td>TCP</td>
+<td>Swarm management</td>
+</tr>
+<tr>
+<td>7946</td>
+<td>TCP</td>
+<td>Node communication</td>
+</tr>
+<tr>
+<td>7946</td>
+<td>UDP</td>
+<td>Node communication</td>
+</tr>
+<tr>
+<td>4789</td>
+<td>UDP</td>
+<td>Overlay network traffic</td>
+</tr>
+</tbody>
+</table>
+<p>Remote SSH access continued working after the Nebula restart.</p>
+<p>Actual inter-node Swarm connectivity has not yet been tested.</p>
 <h2 id="troubleshooting">Troubleshooting</h2>
-<p>Problems encountered and how we resolved them.</p>
+<h3 id="nebula-firewall-initially-blocked-swarm-ports">Nebula firewall initially blocked Swarm ports</h3>
+<p>The original firewall allowed ICMP and SSH but not Docker Swarm traffic.</p>
+<p>Resolution: Added the required Swarm rules for Nebula's <code>servers</code> group and validated the configuration.</p>
+<h3 id="missing-tcp-2377-rule">Missing TCP 2377 rule</h3>
+<p>Initial validation showed TCP/UDP 7946 and UDP 4789 but not TCP 2377.</p>
+<p>Resolution: Added TCP 2377 and confirmed it appeared in the validation output.</p>
+<h3 id="remote-nebula-restart-risk">Remote Nebula restart risk</h3>
+<p>Restarting Nebula could interrupt SSH access to the home server.</p>
+<p>Resolution: Created and validated a rollback configuration, scheduled a temporary systemd rollback timer, restarted Nebula, reconnected through SSH, and canceled the timer.</p>
+<h3 id="protected-configuration-directory">Protected configuration directory</h3>
+<p>A wildcard-based file listing failed because the unprivileged shell could not expand the wildcard inside <code>/etc/nebula</code>.</p>
+<p>Resolution:</p>
+<pre><code class="language-bash">sudo ls -lah /etc/nebula/
+</code></pre>
+<h3 id="outstanding-work">Outstanding work</h3>
+<ul>
+<li>Enroll <code>ryzen-1</code> and any additional workers.</li>
+<li>Verify worker-to-manager and worker-to-worker communication.</li>
+<li>Deploy and secure the private Docker registry.</li>
+<li>Deploy Docker Swarm Visualizer.</li>
+<li>Test multi-node service scheduling.</li>
+<li>Record deployment outputs and troubleshooting results.</li>
+</ul>
 
 
 
