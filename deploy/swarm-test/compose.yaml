@@ -1,0 +1,27 @@
+
+services:
+  whoami:
+    image: traefik/whoami
+
+    ports:
+      - target: 80
+        published: 8081
+        protocol: tcp
+        mode: ingress
+
+    deploy:
+      replicas: 2
+
+      placement:
+        preferences:
+          - spread: node.labels.cs371role
+
+      restart_policy:
+        condition: on-failure
+
+    networks:
+      - swarm-test
+
+networks:
+  swarm-test:
+    driver: overlay
