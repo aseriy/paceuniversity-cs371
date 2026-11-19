@@ -1,3 +1,47 @@
+## Additional replication integrity verification — November 19, 2026
+
+The team performed another round of verification on Ryzen-0 (`10.80.0.10`) and Twix (`10.80.0.11`).
+
+### Cluster health
+
+- Both GlusterFS peers were connected.
+- Both bricks were online.
+- Both self-heal daemons were running.
+- `gluster volume heal gv0 info` reported zero pending entries on both bricks.
+- Volume `gv0` was started and configured as replica 2 with fixed quorum count 2.
+
+### Bidirectional file verification
+
+Ryzen-0 created `verification-ryzen0.txt` through `/mnt/volumes/gv0`, and Twix successfully read its contents.
+
+Twix created `verification-twix.txt` through the same mounted volume, and Ryzen-0 successfully read its contents.
+
+Both files were also confirmed to exist directly on the physical bricks at `/gluster/brick1/data/`.
+
+### SHA-256 integrity verification
+
+The following command was executed on both servers:
+
+```bash
+sudo sha256sum /gluster/brick1/data/verification-*.txt
+```
+
+Both servers returned identical checksums:
+
+| File | SHA-256 checksum |
+|---|---|
+| `verification-ryzen0.txt` | `431635a211fd4c3e2c393ef3e811fe5d0c77b8574a9c3662dac8b7cd01647ee6` |
+| `verification-twix.txt` | `2256a049203dd0f7421bca871b2a507b87d7750902605477f879d2a9e93fa83a` |
+
+These matching checksums confirm that the two verification files are byte-for-byte identical on both physical bricks.
+
+### Remaining limitations
+
+The deployment has passed connectivity, bidirectional file-access, physical replication, self-heal, and checksum-integrity checks.
+
+Controlled node-failure and recovery testing has not yet been performed.
+
+Because `cluster.quorum-count` is set to `2`, losing either node is expected to prevent normal writes. The current configuration should not be described as providing uninterrupted write availability during a node failure.
 # Storage — GlusterFS
 
 **Project:** Pace University CS371  
