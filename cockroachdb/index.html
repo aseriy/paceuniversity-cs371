@@ -14,6 +14,8 @@
         <link rel="prev" href="../cloud-infra/">
       
       
+        <link rel="next" href="../storage/">
+      
       
         
       
@@ -64,7 +66,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#cockroachdb" class="md-skip">
+        <a href="#cockroachdb-two-node-deployment" class="md-skip">
           Skip to content
         </a>
       
@@ -410,13 +412,30 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Prerequisites">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#server-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Server Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
   <a href="#design-decisions" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Design decisions
+        Design Decisions
       
     </span>
   </a>
@@ -427,10 +446,27 @@
   <a href="#installation-and-configuration" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Installation and configuration
+        Installation and Configuration
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Installation and Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#certificate-locations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Certificate Locations
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -443,13 +479,41 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Verification">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-verify-cluster-membership" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Verify Cluster Membership
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
-  <a href="#troubleshooting" class="md-nav__link">
+  <a href="#2-verify-sql-connectivity" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Troubleshooting
+        2. Verify SQL Connectivity
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-verify-replica-distribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Verify Replica Distribution
       
     </span>
   </a>
@@ -460,6 +524,33 @@
   
 </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../storage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Storage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -510,13 +601,30 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Prerequisites">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#server-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Server Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
   <a href="#design-decisions" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Design decisions
+        Design Decisions
       
     </span>
   </a>
@@ -527,10 +635,27 @@
   <a href="#installation-and-configuration" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Installation and configuration
+        Installation and Configuration
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Installation and Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#certificate-locations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Certificate Locations
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -543,13 +668,41 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Verification">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-verify-cluster-membership" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Verify Cluster Membership
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
-  <a href="#troubleshooting" class="md-nav__link">
+  <a href="#2-verify-sql-connectivity" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Troubleshooting
+        2. Verify SQL Connectivity
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-verify-replica-distribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Verify Replica Distribution
       
     </span>
   </a>
@@ -573,19 +726,139 @@
 
 
 
-<h1 id="cockroachdb">CockroachDB</h1>
+<h1 id="cockroachdb-two-node-deployment">CockroachDB — Two-Node Deployment</h1>
+<p><strong>Project:</strong> Pace University CS371
+<strong>Contributors:</strong> Bayron Arevalo Loja (Ryzen-0) and Justin O'Brien (Twix)
+<strong>Last verified:</strong> November 18–19, 2026
+<strong>Status:</strong> Functional SQL cluster; data replication incomplete</p>
 <h2 id="goal">Goal</h2>
-<p>What should be working when this stage is complete?</p>
+<p>Deploy CockroachDB across two Ryzen servers connected through the Nebula VPN.</p>
+<p>The objective is to establish a distributed SQL environment, verify connectivity and SQL functionality from both machines, and evaluate data replication.</p>
 <h2 id="prerequisites">Prerequisites</h2>
-<p>What equipment, access, and previous steps are required?</p>
-<h2 id="design-decisions">Design decisions</h2>
-<p>What did we choose, and why?</p>
-<h2 id="installation-and-configuration">Installation and configuration</h2>
-<p>Steps, commands, and configuration examples.</p>
+<ul>
+<li>Two Linux servers with Docker installed</li>
+<li>Nebula VPN connectivity</li>
+<li>CockroachDB v25.4.4</li>
+<li>TLS certificates for secure communication</li>
+<li>Persistent Docker storage volumes</li>
+<li>SSH access to both machines</li>
+</ul>
+<h3 id="server-configuration">Server Configuration</h3>
+<table>
+<thead>
+<tr>
+<th>Server</th>
+<th>Hostname</th>
+<th>Nebula IP</th>
+<th>Node ID</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ryzen-0</td>
+<td>cs371-bc9b0c</td>
+<td>10.80.0.10</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Twix</td>
+<td>cs371-bc9a92</td>
+<td>10.80.0.11</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<h2 id="design-decisions">Design Decisions</h2>
+<p>We deployed CockroachDB using standalone Docker containers with host networking.</p>
+<p>Each server has its own persistent Docker volume named <code>cockroach-data</code>, mounted inside the container at <code>/cockroach/cockroach-data</code>.</p>
+<p>TLS certificates are mounted at <code>/cockroach/certs</code>.</p>
+<p>The deployment uses CockroachDB's default three-replica target. Our current two-node environment does not satisfy this requirement.</p>
+<h2 id="installation-and-configuration">Installation and Configuration</h2>
+<p>CockroachDB runs in a Docker container named <code>cockroachdb</code> on each server.</p>
+<h3 id="certificate-locations">Certificate Locations</h3>
+<p><strong>Ryzen-0:</strong></p>
+<p><code>/home/milkalmond/cockroach-cluster/ryzen0-certs</code></p>
+<p><strong>Twix:</strong></p>
+<p><code>/home/twix/cockroach-cluster/certs</code></p>
+<p>Both directories are mounted inside their respective containers at <code>/cockroach/certs</code>.</p>
+<p>Required certificates include:</p>
+<ul>
+<li><code>ca.crt</code></li>
+<li><code>node.crt</code></li>
+<li><code>node.key</code></li>
+<li><code>client.root.crt</code></li>
+<li><code>client.root.key</code></li>
+</ul>
+<p>The root client certificate and key are required for certificate-based administrative SQL access. Private keys must be protected and never committed to GitHub.</p>
 <h2 id="verification">Verification</h2>
-<p>How do we demonstrate that it works? Include expected results.</p>
-<h2 id="troubleshooting">Troubleshooting</h2>
-<p>Problems encountered and how we resolved them.</p>
+<h3 id="1-verify-cluster-membership">1. Verify Cluster Membership</h3>
+<p>On Ryzen-0:</p>
+<pre><code class="language-bash">docker exec cockroachdb \
+  ./cockroach node status \
+  --certs-dir=/cockroach/certs \
+  --host=10.80.0.10:26257
+</code></pre>
+<p>On Twix:</p>
+<p>```bash
+docker exec cockroachdb \
+  ./cockroach node status \</p>
+<p>--certs-dir=/cockroach/certs \
+  --host=10.80.0.11:26257</p>
+<p>Result: Both nodes reported is_available=true and is_live=true.</p>
+<h2 id="2-verify-sql-connectivity">2. Verify SQL Connectivity</h2>
+<p>On Twix:</p>
+<p>docker exec cockroachdb \
+  ./cockroach sql \
+  --certs-dir=/cockroach/certs \
+  --host=10.80.0.11:26257 \
+  -e "SHOW DATABASES;"</p>
+<p>Result: The following databases were visible:</p>
+<p>Database           Owner</p>
+<p>cs371_test         root</p>
+<p>defaultdb          root</p>
+<p>postgres           root</p>
+<p>system             node</p>
+<p>This confirms that Twix can execute SQL queries against the CockroachDB cluster.</p>
+<h2 id="3-verify-replica-distribution">3. Verify Replica Distribution</h2>
+<p>Run:</p>
+<p>docker exec cockroachdb \
+  ./cockroach sql \
+  --certs-dir=/cockroach/certs \
+  --host=10.80.0.11:26257 \
+  -e "SELECT node_id, store_id,
+      metrics-&gt;&gt;'replicas' AS replicas,
+      metrics-&gt;&gt;'ranges.underreplicated' AS underreplicated
+      FROM crdb_internal.kv_store_status;"</p>
+<p>Observed results:</p>
+<p>Node      Store     Replicas    Under-replicated</p>
+<p>Ryzen-0 (1)  1         55              55</p>
+<p>Twix (2)     2         0                0</p>
+<p>All 55 ranges were located on Ryzen-0, with no replicas on Twix.</p>
+<p>Important: Although both servers are operational and SQL connectivity works, this deployment does not currently provide data redundancy or high availability.</p>
+<p>Troubleshooting</p>
+<p>Missing Root Client Certificate on Twix</p>
+<p>Initially, CockroachDB administrative commands on Twix prompted for a root password and failed with:</p>
+<p>SQLSTATE: 28P01</p>
+<p>Inspection showed that Twix was missing client.root.crt and client.root.key.</p>
+<p>We securely transferred the root client certificate and key from Ryzen-0 to Twix and restricted private-key permissions to 600.</p>
+<p>Afterward, the cockroach node status and SHOW DATABASES commands worked without password prompts.</p>
+<p>Data Replication Not Working</p>
+<p>CockroachDB logs reported:</p>
+<p>avoid up-replicating to fragile quorum
+likely not enough nodes in cluster</p>
+<p>The cluster currently has two nodes, while the default configuration targets three replicas.</p>
+<p>Replica checks confirmed that all 55 ranges remained on Ryzen-0.</p>
+<p>We have not changed the replication factor or removed any existing data.</p>
+<p>Next Steps</p>
+<p>Coordinate with Alex to obtain approval for a third independent server.</p>
+<p>Review the cockroachdb-sandbox reference deployment for Docker Swarm and HAProxy.</p>
+<p>Plan a three-node CockroachDB deployment with persistent storage and TLS.</p>
+<p>Verify that replicas are distributed across nodes.</p>
+<p>Perform controlled failover testing after replication is healthy.</p>
+<p>Conclusion</p>
+<p>We successfully deployed and verified a two-node CockroachDB cluster across Ryzen-0 and Twix.</p>
+<p>Both machines can access the same SQL cluster using TLS authentication.</p>
+<p>However, the current deployment is suitable for development and SQL connectivity testing only. Data replication and high availability remain incomplete.</p>
 
 
 
