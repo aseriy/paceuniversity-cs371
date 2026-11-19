@@ -10,4 +10,4 @@ nav:
   - Network Mesh: network-mesh.md
   - Cloud Infrastructure: cloud-infra.md
   - CockroachDB: cockroachdb.md
-
+  - Storage: storage.md
